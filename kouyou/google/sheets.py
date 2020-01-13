@@ -88,4 +88,4 @@ def send_df_to_gspread(workbook_name, folder_id, df_list):
 
     # Remove local sheet
     os.remove(workbook_name+".xlsx")
-    
+  
