@@ -15,6 +15,7 @@ numpy = "*"
 oauth2client = "*"
 pandas = "*"
 unidecode = "*"
+openpyxl = "*"
 
 [requires]
 python_version = "3.8"
