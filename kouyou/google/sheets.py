@@ -7,6 +7,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
 import unidecode
 
+from kouyou.google import drive
+
 
 def connect_to_google_sheet():
     """Create connection with google spreadsheets api.
@@ -18,36 +20,15 @@ def connect_to_google_sheet():
               "https://spreadsheets.google.com/feeds"]
     try:
         cred_file = (os.path.expanduser("~") +
-                     "/.ssh/google_drive_api.json")
+                     "/.ssh/google_drive_key.json")
     except FileNotFoundError:
-        raise FileNotFoundError("Couldn't find file 'google_drive_api.json'," +
+        raise FileNotFoundError("Couldn't find file 'google_drive_key.json'," +
                                 " verify if file exists in /home/USER/.ssh/")
 
     credentials = ServiceAccountCredentials.from_json_keyfile_name(cred_file,
                                                                    SCOPES)
     google_connection = gspread.authorize(credentials)
     return google_connection
-
-
-def connect_to_google_drive():
-    """Create connection with google drive api.
-
-    :return: instance of google drive api connection
-    :rtype: googleapiclient.discovery.Resource
-    """
-    SCOPES = ["https://www.googleapis.com/auth/drive"]
-
-    try:
-        cred_file = (os.path.expanduser("~") +
-                     "/.ssh/google_drive_api.json")
-    except FileNotFoundError:
-        raise FileNotFoundError("Couldn't find file 'google_drive_api.json'," +
-                                " verify if file exists in /home/USER/.ssh/")
-
-    credentials = ServiceAccountCredentials.from_json_keyfile_name(cred_file,
-                                                                   SCOPES)
-    driver_service = build("drive", "v3", credentials=credentials)
-    return driver_service
 
 
 def get_workbook_as_df(file_name):
@@ -98,7 +79,7 @@ def send_df_to_gspread(workbook_name, folder_id, df_list):
     writer.save()
 
     # Connect to google drive
-    driver_service = connect_to_google_drive()
+    driver_service = drive.connect_to_google_drive()
 
     body = {"name": workbook_name,
             "mimeType": GSPREAD_MIMETYPE,
