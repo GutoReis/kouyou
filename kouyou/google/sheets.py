@@ -16,7 +16,12 @@ def connect_to_google_sheet():
     """
     SCOPES = ["https://www.googleapis.com/auth/drive",
               "https://spreadsheets.google.com/feeds"]
-    cred_file = os.path.dirname(os.path.abspath("~/.ssh/google_drive_api.json"))
+    try:
+        cred_file = (os.path.expanduser("~") +
+                     "/.ssh/google_drive_api.json")
+    except FileNotFoundError:
+        raise FileNotFoundError("Couldn't find file 'google_drive_api.json'," +
+                                " verify if file exists in /home/USER/.ssh/")
 
     credentials = ServiceAccountCredentials.from_json_keyfile_name(cred_file,
                                                                    SCOPES)
@@ -32,7 +37,13 @@ def connect_to_google_drive():
     """
     SCOPES = ["https://www.googleapis.com/auth/drive"]
 
-    cred_file = os.path.dirname(os.path.abspath("~/.ssh/google_drive_api.json"))
+    try:
+        cred_file = (os.path.expanduser("~") +
+                     "/.ssh/google_drive_api.json")
+    except FileNotFoundError:
+        raise FileNotFoundError("Couldn't find file 'google_drive_api.json'," +
+                                " verify if file exists in /home/USER/.ssh/")
+
     credentials = ServiceAccountCredentials.from_json_keyfile_name(cred_file,
                                                                    SCOPES)
     driver_service = build("drive", "v3", credentials=credentials)
