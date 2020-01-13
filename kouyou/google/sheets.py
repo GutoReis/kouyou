@@ -67,7 +67,6 @@ def send_df_to_gspread(workbook_name, folder_id, df_list):
     GSPREAD_MIMETYPE = "application/vnd.google-apps.spreadsheet"
     EXCEL_MIMETYPE = ("application/vnd.openxmlformats-officedocument." +
                       "spreadsheetml.sheet")
-    
     # Writing file to send
     writer = pd.ExcelWriter(workbook_name+".xlsx")
     sheet_number = 1
@@ -89,3 +88,4 @@ def send_df_to_gspread(workbook_name, folder_id, df_list):
 
     # Remove local sheet
     os.remove(workbook_name+".xlsx")
+    

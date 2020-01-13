@@ -35,7 +35,8 @@ def delete_file_in_drive(file_name, folder_id):
     """
     drive_service = connect_to_google_drive()
     # Get files in directory
-    result = drive_service.files().list(q="'"+folder_id+"' in parents").execute()
+    result = drive_service.files().list(q="'"+folder_id+"' in parents") \
+            .execute()
 
     # Get file(s) ID
     id_list = list()
