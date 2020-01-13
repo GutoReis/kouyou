@@ -36,7 +36,7 @@ def delete_file_in_drive(file_name, folder_id):
     drive_service = connect_to_google_drive()
     # Get files in directory
     result = drive_service.files().list(q="'"+folder_id+"' in parents") \
-            .execute()
+        .execute()
 
     # Get file(s) ID
     id_list = list()
@@ -46,3 +46,18 @@ def delete_file_in_drive(file_name, folder_id):
     # Deleting file(s)
     for file_id in id_list:
         drive_service.files().delete(fileId=file_id).execute()
+
+
+def create_3rdparty_file_in_drive(file_name, folder_id):
+    """Create an empty file of type 3rd party app on Drive Folder.
+
+    :param file_name: Name of the file.
+    :type file_name: str
+    :param folder_id: Folder id to save the file
+    :type folder_id: str
+    """
+    driver_service = connect_to_google_drive()
+    body = {"name": file_name,
+            "mimeType": "application/vnd.google-apps.drive-sdk",
+            "parents": [folder_id]}
+    driver_service.files().create(body=body).execute()
