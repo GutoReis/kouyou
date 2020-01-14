@@ -35,14 +35,13 @@ def delete_file_in_drive(file_name, folder_id):
     """
     drive_service = connect_to_google_drive()
     # Get files in directory
-    result = drive_service.files().list(q="'"+folder_id+"' in parents") \
-        .execute()
+    search_query = f"'{folder_id}' in parents and name='{file_name}'"
+    result = drive_service.files().list(q=search_query).execute()
 
     # Get file(s) ID
     id_list = list()
     for file in result["files"]:
-        if file["name"] == file_name:
-            id_list.append(file["id"])
+        id_list.append(file["id"])
     # Deleting file(s)
     for file_id in id_list:
         drive_service.files().delete(fileId=file_id).execute()
