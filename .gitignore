@@ -130,3 +130,6 @@ dmypy.json
 
 # Visual Studio Code
 .vscode/
+
+# Random file types
+*.xlsx
