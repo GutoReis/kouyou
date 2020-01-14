@@ -48,8 +48,9 @@ def get_workbook_as_df(file_name):
 
     for worksheet in worksheet_list:
         title = unidecode.unidecode(worksheet.title).lower()
-        data = worksheet.get_all_values()
-        worksheet_df = pd.DataFrame(data)
+        header = worksheet.get_all_values()[0]
+        data = worksheet.get_all_values()[1:]
+        worksheet_df = pd.DataFrame(data, columns=header)
         worksheet_df_dict[title] = worksheet_df
     return worksheet_df_dict
 
