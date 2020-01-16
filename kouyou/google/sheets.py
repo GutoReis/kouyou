@@ -1,7 +1,6 @@
 import os
 
-from apiclient.discovery import build
-from apiclient.http import MediaFileUpload
+from googleapiclient.http import MediaFileUpload
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
@@ -18,15 +17,14 @@ def connect_to_google_sheet():
     """
     SCOPES = ["https://www.googleapis.com/auth/drive",
               "https://spreadsheets.google.com/feeds"]
+    cred_file = (os.path.expanduser("~") + "/.ssh/google_drive_key.json")
     try:
-        cred_file = (os.path.expanduser("~") +
-                     "/.ssh/google_drive_key.json")
+        credentials = ServiceAccountCredentials. \
+            from_json_keyfile_name(cred_file, SCOPES)
     except FileNotFoundError:
         raise FileNotFoundError("Couldn't find file 'google_drive_key.json'," +
                                 " verify if file exists in /home/USER/.ssh/")
 
-    credentials = ServiceAccountCredentials.from_json_keyfile_name(cred_file,
-                                                                   SCOPES)
     google_connection = gspread.authorize(credentials)
     return google_connection
 
