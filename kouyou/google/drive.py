@@ -20,7 +20,9 @@ def connect_to_google_drive():
         raise FileNotFoundError("Couldn't find file 'google_drive_key.json'," +
                                 " verify if file exists in /home/USER/.ssh/")
 
-    driver_service = build("drive", "v3", credentials=credentials)
+    driver_service = build("drive", "v3",
+                           credentials=credentials,
+                           cache_discovery=False)
     return driver_service
 
 
