@@ -1,4 +1,5 @@
 import os
+import pathlib
 
 from googleapiclient.http import MediaFileUpload
 import gspread
@@ -17,7 +18,8 @@ def connect_to_google_sheet():
     """
     SCOPES = ["https://www.googleapis.com/auth/drive",
               "https://spreadsheets.google.com/feeds"]
-    cred_file = (os.path.expanduser("~") + "/.ssh/google_drive_key.json")
+    cred_file = (str(pathlib.Path(__file__).parent.absolute()) +
+                 "/google_drive_key.json")
     try:
         credentials = ServiceAccountCredentials. \
             from_json_keyfile_name(cred_file, SCOPES)

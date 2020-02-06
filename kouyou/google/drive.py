@@ -1,4 +1,4 @@
-import os
+import pathlib
 
 from googleapiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
@@ -11,7 +11,9 @@ def connect_to_google_drive():
     :rtype: googleapiclient.discovery.Resource
     """
     SCOPES = ["https://www.googleapis.com/auth/drive"]
-    cred_file = (os.path.expanduser("~") + "/.ssh/google_drive_key.json")
+    cred_file = (str(pathlib.Path(__file__).parent.absolute()) +
+                 "/google_drive_key.json")
+    print(cred_file)
 
     try:
         credentials = ServiceAccountCredentials. \
