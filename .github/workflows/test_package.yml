@@ -10,7 +10,7 @@ jobs:
     - name: Unlock Secrets
       uses: sliteteam/github-action-git-crypt-unlock@1.0.2
       env:
-        GIT_CRYPT_KEY: ${{ secrets.GTI_CRYPT }}
+        GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT }}
 
     - uses: actions/checkout@v2
     - name: Setup Python
