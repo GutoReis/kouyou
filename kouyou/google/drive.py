@@ -3,6 +3,8 @@ import pathlib
 from googleapiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
 
+from kouyou.google import utils
+
 
 def connect_to_google_drive():
     """Create connection with google drive api.
@@ -11,16 +13,20 @@ def connect_to_google_drive():
     :rtype: googleapiclient.discovery.Resource
     """
     SCOPES = ["https://www.googleapis.com/auth/drive"]
+    
     cred_file = (str(pathlib.Path(__file__).parent.absolute()) +
-                 "/google_drive_key.json")
-    print(cred_file)
-
+                 "/google_key.json")
     try:
         credentials = ServiceAccountCredentials. \
             from_json_keyfile_name(cred_file, SCOPES)
     except FileNotFoundError:
-        raise FileNotFoundError("Couldn't find file 'google_drive_key.json'," +
-                                " verify if file exists in /home/USER/.ssh/")
+        utils.generate_json_key_file()
+        credentials = ServiceAccountCredentials. \
+            from_json_keyfile_name(cred_file, SCOPES)
+    except ValueError:
+        raise ValueError("Couldn't find keys for Google Credential, " +
+                         "verify if you have set environment variables in " +
+                         "your machine or in a .env file (for pipenv usage)")
 
     driver_service = build("drive", "v3",
                            credentials=credentials,

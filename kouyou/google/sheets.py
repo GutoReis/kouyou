@@ -7,7 +7,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
 import unidecode
 
-from kouyou.google import drive
+from kouyou.google import drive, utils
 
 
 def connect_to_google_sheet():
@@ -19,13 +19,18 @@ def connect_to_google_sheet():
     SCOPES = ["https://www.googleapis.com/auth/drive",
               "https://spreadsheets.google.com/feeds"]
     cred_file = (str(pathlib.Path(__file__).parent.absolute()) +
-                 "/google_drive_key.json")
+                 "/google_key.json")
     try:
         credentials = ServiceAccountCredentials. \
             from_json_keyfile_name(cred_file, SCOPES)
     except FileNotFoundError:
-        raise FileNotFoundError("Couldn't find file 'google_drive_key.json'," +
-                                " verify if file exists in /home/USER/.ssh/")
+        utils.generate_json_key_file()
+        credentials = ServiceAccountCredentials. \
+            from_json_keyfile_name(cred_file, SCOPES)
+    except ValueError:
+        raise ValueError("Couldn't find keys for Google Credential, " +
+                         "verify if you have set environment variables in " +
+                         "your machine or in a .env file (for pipenv usage)")
 
     google_connection = gspread.authorize(credentials)
     return google_connection
