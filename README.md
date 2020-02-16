@@ -1,3 +1,5 @@
+![Test Kouyou Package](https://github.com/GutoReis/kouyou/workflows/Test%20Kouyou%20Package/badge.svg?branch=master)
+
 ![kouyou logo](kouyou.png)
 
 # Kouyou
