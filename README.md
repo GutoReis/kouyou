@@ -10,4 +10,4 @@
 > * Google Drive utility to save a list of pandas.DataFrame as a single google sheet with multiple tabs
 > * Google Drive utility to update existed google sheet from a pandas.DataFrame
 
-**Kouyou is part of the Kaiso project** (Link to kaiso incoming)
+**Kouyou is part of the Zaidan project** (Link to Zaidan incoming)
