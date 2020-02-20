@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "kouyou"
+version = "0.1.0"
+description = "My personal utils project (Kouyou - 効用 - Utility)"
+authors = ["Gustavo Reis <guto.reisdelima@gmail.com>"]
+license = "MIT"
+readme = "README.rst"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+google-api-python-client = "^1.7.11"
+gspread = "^3.2.0"
+numpy = "^1.18.1"
+oauth2client = "^4.1.3"
+pandas = "^1.0.1"
+unidecode = "^1.1.1"
+openpyxl = "^3.0.3"
+python-dotenv = "^0.11.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.3.5"
+pylint = "^2.4.4"
+pytest-cov = "^2.8.1"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
