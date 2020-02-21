@@ -8,6 +8,7 @@ from kouyou.google import utils
 
 def connect_to_google_drive():
     """Create connection with google drive api.
+
     :return: instance of google drive api connection
     :rtype: googleapiclient.discovery.Resource
     """
@@ -35,6 +36,7 @@ def connect_to_google_drive():
 
 def delete_file_in_drive(file_name, folder_id):
     """Delete every file with name from especific dir on Drive.
+
     :param file_name: Name of the file to be deleted
     :type file_name: str
     :param folder_id: parent folder id where lies the files
@@ -56,6 +58,7 @@ def delete_file_in_drive(file_name, folder_id):
 
 def create_3rdparty_file_in_drive(file_name, folder_id):
     """Create an empty file of type 3rd party app on Drive Folder.
+    
     :param file_name: Name of the file.
     :type file_name: str
     :param folder_id: Folder id to save the file

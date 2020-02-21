@@ -12,6 +12,7 @@ from kouyou.google import drive, utils
 
 def connect_to_google_sheet():
     """Create connection with google spreadsheets api.
+
     :return: instance os google api connection
     :rtype: gspread.client.Client
     """
@@ -37,9 +38,10 @@ def connect_to_google_sheet():
 
 def get_workbook_as_df(file_name):
     """Get shared spreadsheet from google drive.
+
     :param file_name: File name to search
     :type file_name: str
-    :return: dict from spreadsheet file: pandas.core.frame.DataFrame
+    :return: dict from spreadsheet file (pandas.core.frame.DataFrame)
     :rtype: dict
     """
     google_connection = connect_to_google_sheet()
@@ -59,6 +61,7 @@ def get_workbook_as_df(file_name):
 
 def send_df_to_gspread(workbook_name, folder_id, df_list):
     """Upload a file as a google spreadsheet direct to google drive.
+
     :param workbook_name: File name, without extension
     :type workbook_name: str
     :param folder_id: Google Drive Folder ID
