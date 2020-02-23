@@ -10,7 +10,7 @@ jobs:
         - name: Setup .env file
           run: |
             touch .env 
-            python "import os; print(os.environ['GOOGLE_PROJECT_ID']"
+            python "import os; print(os.environ['GOOGLE_PROJECT_ID'])"
             
             echo "export GOOGLE_PROJECT_ID="${{ secrets.GOOGLE_PROJECT_ID }}
             echo "export GOOGLE_PRIVATE_KEY_ID="${{ secrets.GOOGLE_PRIVATE_KEY_ID }}
