@@ -8,12 +8,13 @@ jobs:
         steps:
         - uses: actions/checkout@v2
         - name: Setup .env file
-          run: touch .env |
-          echo "export GOOGLE_PROJECT_ID"${{ secrets.GOOGLE_PROJECT_ID }} >> .env |
-          echo "export GOOGLE_PRIVATE_KEY_ID"${{ secrets.GOOGLE_PRIVATE_KEY_ID }} >> .env |
-          echo "export GOOGLE_PRIVATE_KEY"${{ secrets.GOOGLE_PRIVATE_KEY }} >> .env |
-          echo "export GOOGLE_CLIENT_EMAIL"${{ secrets.GOOGLE_CLIENT_EMAIL }} >> .env |
-          echo "export GOOGLE_CLIENT_ID"${{ secrets.GOOGLE_CLIENT_ID }} >> .env |
-          echo "export GOOGLE_CLIENT_X509_CERT_URL"${{ secrets.GOOGLE_CLIENT_X509_CERT_URL }} >> .env |
-          pwd |
-          cat .env
+          run: |
+            touch .env 
+            echo "export GOOGLE_PROJECT_ID"${{ secrets.GOOGLE_PROJECT_ID }} >> .env
+            echo "export GOOGLE_PRIVATE_KEY_ID"${{ secrets.GOOGLE_PRIVATE_KEY_ID }} >> .env
+            echo "export GOOGLE_PRIVATE_KEY"${{ secrets.GOOGLE_PRIVATE_KEY }} >> .env
+            echo "export GOOGLE_CLIENT_EMAIL"${{ secrets.GOOGLE_CLIENT_EMAIL }} >> .env
+            echo "export GOOGLE_CLIENT_ID"${{ secrets.GOOGLE_CLIENT_ID }} >> .env
+            echo "export GOOGLE_CLIENT_X509_CERT_URL"${{ secrets.GOOGLE_CLIENT_X509_CERT_URL }} >> .env
+            pwd
+            cat .env
