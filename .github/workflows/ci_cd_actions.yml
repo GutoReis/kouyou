@@ -16,6 +16,9 @@ jobs:
             echo "export GOOGLE_CLIENT_EMAIL="${{ secrets.GOOGLE_CLIENT_EMAIL }} >> .env
             echo "export GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }} >> .env
             echo "export GOOGLE_CLIENT_X509_CERT_URL="${{ secrets.GOOGLE_CLIENT_X509_CERT_URL }} >> .env
-            pwd
-            cat .env
-            ls -la
+        - uses: actions/setup/python@v1
+        - uses: dschep/install-poetry-action@v1.3
+        - name: Setup poetry
+          run: poetry install
+        - name: Running Pytest
+          run: poetry run pytest --cov-report=xml --cov=kouyou tests/
