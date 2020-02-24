@@ -1,6 +1,6 @@
 name: CI/CD for Kouyou Package
 
-on: [push]
+on: [master]
 
 jobs:
     build_and_test:
