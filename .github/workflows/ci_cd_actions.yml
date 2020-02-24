@@ -3,7 +3,8 @@ name: CI/CD for Kouyou Package
 on: [push]
 
 jobs:
-    build:
+    build_and_test:
+        name: Build and Test
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@v2
@@ -22,3 +23,12 @@ jobs:
           run: poetry install
         - name: Running Pytest
           run: poetry run pytest --cov-report=xml --cov=kouyou tests/
+        - name: Uploading results to Codecov
+          uses: codecov/codecov-action@v1
+          with:
+            token: ${{ secrets.CODECOV_TOKEN }}
+            file: ./coverage.xml
+            flags: unittest
+            fail_ci_if_error: true
+          
+        
