@@ -1,3 +1,5 @@
+import time
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -78,6 +80,8 @@ def test_send_df_to_gspread():
                               folder_id=folder_id,
                               df_list=[test_df])
 
+    # Wait to upload
+    time.sleep(20)
     # Checking if file has been uploaded
     uploaded = False
     drive_service = drive.connect_to_google_drive()
