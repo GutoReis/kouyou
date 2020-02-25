@@ -1,0 +1,32 @@
+name: Test Kouyou Package
+
+on: [pull_request]
+
+jobs:
+  build_and_test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .env file
+      run: |
+        touch .env 
+        echo "export GOOGLE_PROJECT_ID="${{ secrets.GOOGLE_PROJECT_ID }} >> .env
+        echo "export GOOGLE_PRIVATE_KEY_ID="${{ secrets.GOOGLE_PRIVATE_KEY_ID }} >> .env
+        echo "export GOOGLE_PRIVATE_KEY="${{ secrets.GOOGLE_PRIVATE_KEY }} >> .env
+        echo "export GOOGLE_CLIENT_EMAIL="${{ secrets.GOOGLE_CLIENT_EMAIL }} >> .env
+        echo "export GOOGLE_CLIENT_ID="${{ secrets.GOOGLE_CLIENT_ID }} >> .env
+        echo "export GOOGLE_CLIENT_X509_CERT_URL="${{ secrets.GOOGLE_CLIENT_X509_CERT_URL }} >> .env
+    - uses: actions/setup-python@v1
+    - uses: dschep/install-poetry-action@v1.3
+    - name: Setup poetry
+      run: poetry install
+    - name: Running Pytest
+      run: poetry run pytest --cov-report=xml --cov=kouyou tests/
+    - name: Uploading results to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+        flags: unittest
+        fail_ci_if_error: true
