@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "kouyou"
-version = "1.0.0"
+version = "1.0"
 description = "My personal utils project (Kouyou - 効用 - Utility)"
 authors = ["Gustavo Reis <guto.reisdelima@gmail.com>"]
 license = "MIT"
