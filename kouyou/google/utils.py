@@ -3,20 +3,24 @@ import json
 import os
 import pathlib
 
+from dotenv import load_dotenv
+
 
 def generate_json_key_file():
     """Generate the json key file for google credentials.
 
-    The variables must be set in the enviroment:
-    project_id ==> GOOGLE_PROJECT_ID
-    private_key_id ==> GOOGLE_PRIVATE_KEY_ID
-    private_key ==> GOOGLE_PRIVATE_KEY
-    client_email ==> GOOGLE_CLIENT_EMAIL
-    client_x509_cert_url ==> GOOGLE_CLIENT_X509_CERT_URL
-
+    The variables must be set in a .env file in project:
+    
+    project_id ==> GOOGLE_PROJECT_ID\n
+    private_key_id ==> GOOGLE_PRIVATE_KEY_ID\n
+    private_key ==> GOOGLE_PRIVATE_KEY \n
+    client_email ==> GOOGLE_CLIENT_EMAIL\n
+    client_x509_cert_url ==> GOOGLE_CLIENT_X509_CERT_URL\n
+    
     This values can be found in the json key file, downloaded from
     console.developers.google.com
     """
+    load_dotenv()
     path = pathlib.Path(__file__).parent.absolute()
     rsa_key = os.getenv("GOOGLE_PRIVATE_KEY").replace("\\n", "\n")
     json_key = {"type": "service_account",

@@ -1,3 +1,5 @@
+import time
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -41,7 +43,6 @@ def workbook_as_df():
 
 def test_connection_to_google_sheet():
     """Test the connection method to google sheets api.
-
     Validate if connection returned as gspread.client.Client
     """
     from gspread.client import Client
@@ -51,7 +52,6 @@ def test_connection_to_google_sheet():
 
 def test_get_workbook_as_df(workbook_as_df):
     """Test get_workbook_as_df to check if reading is ok.
-
     Compare what returns from the method to workbook_as_df var
     """
     file_name = "kouyou_sheets_read_test"
@@ -69,7 +69,6 @@ def test_error_get_workbook_as_df():
 
 def test_send_df_to_gspread():
     """Test send_df_to_gspread method.
-
     After sending, the file is searched in the folder,
     and deleted after that
     """
@@ -81,6 +80,8 @@ def test_send_df_to_gspread():
                               folder_id=folder_id,
                               df_list=[test_df])
 
+    # Wait to upload
+    time.sleep(20)
     # Checking if file has been uploaded
     uploaded = False
     drive_service = drive.connect_to_google_drive()
@@ -103,3 +104,4 @@ def test_error_send_df_to_gspread():
     folder_id = "folder_error"
     with pytest.raises(HttpError):
         sheets.send_df_to_gspread(file_name, folder_id, [test_df])
+        

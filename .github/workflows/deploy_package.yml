@@ -1,0 +1,21 @@
+name: Auto Deploy Kouyou Package on PyPI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v1
+    - uses: dschep/install-poetry-action@v1.3
+    - name: Setup Poetry
+      run: poetry install
+    - name: Deploy to PyPI
+      run: poetry publish --build --username ${{ secrets.PYPI_USER }} --password ${{ secrets.PYPI_PASS }}
+          
+        

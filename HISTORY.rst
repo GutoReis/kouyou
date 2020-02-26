@@ -3,7 +3,8 @@ History
 =======
 
 
-0.0.1 (2020-01-09)
+1.0.0 (2020-02-25)
 ------------------
 Initial release of package
- * Google Drive utils for Google Sheets
+ * Utils for Google Drive API
+ * Utils for Google Sheets API

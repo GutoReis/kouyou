@@ -41,8 +41,7 @@ def get_workbook_as_df(file_name):
 
     :param file_name: File name to search
     :type file_name: str
-
-    :return: dict from spreadsheet file: pandas.core.frame.DataFrame
+    :return: dict from spreadsheet file (pandas.core.frame.DataFrame)
     :rtype: dict
     """
     google_connection = connect_to_google_sheet()

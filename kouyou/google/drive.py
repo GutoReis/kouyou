@@ -58,7 +58,7 @@ def delete_file_in_drive(file_name, folder_id):
 
 def create_3rdparty_file_in_drive(file_name, folder_id):
     """Create an empty file of type 3rd party app on Drive Folder.
-
+    
     :param file_name: Name of the file.
     :type file_name: str
     :param folder_id: Folder id to save the file
@@ -69,3 +69,4 @@ def create_3rdparty_file_in_drive(file_name, folder_id):
             "mimeType": "application/vnd.google-apps.drive-sdk",
             "parents": [folder_id]}
     driver_service.files().create(body=body).execute()
+    
